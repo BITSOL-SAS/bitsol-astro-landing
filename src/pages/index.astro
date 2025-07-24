@@ -1,5 +1,6 @@
 ---
 import Carousel from '../components/carrusel.astro';
+import Nav from '../components/nav.astro';
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -88,13 +89,13 @@ import Carousel from '../components/carrusel.astro';
       align-items: center;
       justify-content: center;
       text-align: center;
-	  margin-top: 150px;
+	  margin-top: 80px;
     }
     .spotlight-title {
       font-family: 'Chakra Petch', Arial, sans-serif;
       font-size: 4.2rem;
       font-weight: 800;
-      line-height: 1.05;
+      line-height: 1.0;
       margin: 0 0 0.3em 0;
       letter-spacing: 0.01em;
       color: #fff;
@@ -116,7 +117,7 @@ import Carousel from '../components/carrusel.astro';
       font-size: 2.2rem;
       font-weight: 500;
       color: #fff;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
       opacity: 0.92;
       text-align: center;
     }
@@ -223,7 +224,10 @@ import Carousel from '../components/carrusel.astro';
   <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+
   <div class="spotlight-demo-container">
+	<Nav />
+
     <div class="spotlight-bg"></div>
     <svg class="spotlight-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3787 2842" fill="none">
       <g filter="url(#filter)">
