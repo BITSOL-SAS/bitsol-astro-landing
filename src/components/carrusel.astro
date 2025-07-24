@@ -1,0 +1,104 @@
+---
+const slides = [
+  {
+    title: "Mystic Mountains",
+    button: "Explorar componente",
+    src: "https://images.unsplash.com/photo-1494806812796-244fe51b774d?q=80&w=3534&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Urban Dreams",
+    button: "Explorar componente",
+    src: "https://images.unsplash.com/photo-1518710843675-2540dd79065c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Neon Nights",
+    button: "Explorar componente",
+    src: "https://images.unsplash.com/photo-1590041794748-2d8eb73a571c?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Desert Whispers",
+    button: "Explorar componente",
+    src: "https://images.unsplash.com/photo-1679420437432-80cfbf88986c?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+];
+const visibleSlides = 2; // Ahora se muestran 2 imágenes grandes
+---
+
+<style>
+.carousel-astro-container {
+  position: relative;
+  width: calc(100vw - 80px);
+  max-width: none;
+  margin: 2rem 40px;
+  overflow: hidden;
+  border-radius: 0;
+  background: transparent;
+  z-index: 10;
+  height: 800px;
+}
+.carousel-astro-track {
+  display: flex;
+  gap: 28px;
+  transition: transform 0.7s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
+  height: 100%;
+}
+.carousel-astro-slide {
+  /* Mostrar 1.1 slides a la vez: el principal y el 10% del siguiente */
+  flex: 0 0 calc((100vw - 80px - 28px) / 1.1);
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  background: transparent;
+  height: 100%;
+  box-shadow: none;
+  border: 1.5px solid #fff;
+}
+.carousel-astro-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 5px;
+}
+@media (max-width: 900px) {
+  .carousel-astro-container { height: 320px; width: calc(100vw - 16px); margin: 2rem 8px; }
+  .carousel-astro-track { gap: 12px; }
+  .carousel-astro-slide { flex: 0 0 calc((100vw - 16px - 12px) / 1.05); border-radius: 5px; }
+  .carousel-astro-slide img { border-radius: 5px; }
+}
+</style>
+
+<div class="carousel-astro-container" id="astro-carousel">
+  <div class="carousel-astro-track" style="transform: translateX(0);">
+    {slides.map((slide, i) => (
+      <div class="carousel-astro-slide" data-index={i}>
+        <img src={slide.src} alt={slide.title} />
+      </div>
+    ))}
+  </div>
+</div>
+
+<script type="module" is:inline>
+  const container = document.getElementById('astro-carousel');
+  const track = container.querySelector('.carousel-astro-track');
+  const slides = Array.from(container.querySelectorAll('.carousel-astro-slide'));
+  let current = 0;
+  const visible = 1.1;
+  let interval;
+
+  function updateCarousel() {
+    const slideWidth = slides[0].offsetWidth + 28; // 28px gap
+    track.style.transform = `translateX(-${current * slideWidth}px)`;
+  }
+
+  function nextSlide() {
+    current = (current + 1) % Math.ceil(slides.length - visible + 1);
+    updateCarousel();
+  }
+
+  interval = setInterval(nextSlide, 5000);
+  window.addEventListener('resize', updateCarousel);
+  updateCarousel();
+</script>
