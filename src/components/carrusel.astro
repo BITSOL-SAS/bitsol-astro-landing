@@ -1,25 +1,15 @@
 ---
 const slides = [
-  {
-    title: "Mystic Mountains",
-    button: "Explorar componente",
-    src: "/imgs/imagen_01.png",
-  },
-  {
-    title: "Urban Dreams",
-    button: "Explorar componente",
-    src: "https://images.unsplash.com/photo-1518710843675-2540dd79065c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "Neon Nights",
-    button: "Explorar componente",
-    src: "https://images.unsplash.com/photo-1590041794748-2d8eb73a571c?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    title: "Desert Whispers",
-    button: "Explorar componente",
-    src: "https://images.unsplash.com/photo-1679420437432-80cfbf88986c?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
+{
+title: "Mystic Mountains",
+button: "Explorar componente",
+src: "/imgs/imagen_02.png",
+},
+{
+  title: "Mystic Mountains",
+  button: "Explorar componente",
+  src: "/imgs/imagen_01.png",
+  }
 ];
 const visibleSlides = 2; // Ahora se muestran 2 imágenes grandes
 ---
@@ -34,8 +24,9 @@ const visibleSlides = 2; // Ahora se muestran 2 imágenes grandes
     border-radius: 0;
     background: transparent;
     z-index: 10;
-    height: 500px;
+    height: 700px;
   }
+
   .carousel-astro-track {
     display: flex;
     gap: 28px;
@@ -43,6 +34,7 @@ const visibleSlides = 2; // Ahora se muestran 2 imágenes grandes
     will-change: transform;
     height: 100%;
   }
+
   .carousel-astro-slide {
     /* Mostrar 1.1 slides a la vez: el principal y el 10% del siguiente */
     flex: 0 0 calc((100vw - 80px - 28px) / 1.1);
@@ -54,6 +46,7 @@ const visibleSlides = 2; // Ahora se muestran 2 imágenes grandes
     height: 100%;
     box-shadow: none;
   }
+
   .carousel-astro-slide img {
     width: 100%;
     height: 100%;
@@ -61,19 +54,48 @@ const visibleSlides = 2; // Ahora se muestran 2 imágenes grandes
     display: block;
     border-radius: 3px;
   }
+
+  .carousel-astro-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 20;
+  }
+
+  .carousel-astro-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.3s ease;
+  }
+
+  .carousel-astro-dot.active {
+    background-color: #fff;
+  }
+
   @media (max-width: 900px) {
     .carousel-astro-container {
       height: 320px;
       width: calc(100vw - 16px);
       margin: 2rem 8px;
     }
+
     .carousel-astro-track {
       gap: 12px;
     }
+
     .carousel-astro-slide {
       flex: 0 0 calc((100vw - 16px - 12px) / 1.05);
       border-radius: 5px;
     }
+
     .carousel-astro-slide img {
       border-radius: 5px;
     }
@@ -83,12 +105,15 @@ const visibleSlides = 2; // Ahora se muestran 2 imágenes grandes
 <div class="carousel-astro-container" id="astro-carousel">
   <div class="carousel-astro-track" style="transform: translateX(0);">
     {
-      slides.map((slide, i) => (
-        <div class="carousel-astro-slide" data-index={i}>
-          <img src={slide.src} alt={slide.title} />
-        </div>
-      ))
+    slides.map((slide, i) => (
+    <div class="carousel-astro-slide" data-index={i}>
+      <img src={slide.src} alt={slide.title} />
+    </div>
+    ))
     }
+  </div>
+  <div class="carousel-astro-dots">
+    {slides.map((_, i) => <button class="carousel-astro-dot" data-slide-to={i} />)}
   </div>
 </div>
 
@@ -98,14 +123,34 @@ const visibleSlides = 2; // Ahora se muestran 2 imágenes grandes
   const slides = Array.from(
     container.querySelectorAll(".carousel-astro-slide"),
   );
+  const dots = Array.from(container.querySelectorAll(".carousel-astro-dot"));
   let current = 0;
   const visible = 1.1;
   let interval;
 
+  function updateDots() {
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === current);
+    });
+  }
+
   function updateCarousel() {
     const slideWidth = slides[0].offsetWidth + 28; // 28px gap
     track.style.transform = `translateX(-${current * slideWidth}px)`;
+    updateDots();
   }
+
+  function goToSlide(index) {
+    current = index;
+    updateCarousel();
+    // Reset the interval after manual navigation
+    clearInterval(interval);
+    interval = setInterval(nextSlide, 5000);
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => goToSlide(i));
+  });
 
   function nextSlide() {
     current = (current + 1) % Math.ceil(slides.length - visible + 1);

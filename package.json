@@ -9,6 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.12.3"
+    "astro": "^5.12.3",
+    "gsap": "^3.13.0",
+    "three": "^0.178.0"
   }
 }
