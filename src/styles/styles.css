@@ -1,21 +1,44 @@
-html,
-body {
+html {
     height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background: #000;
-    width: 100vw;
-    overflow-y: auto;
-    overflow-x: hidden;
-    min-height: 100vh;
 }
 
 body {
     width: 100vw;
     min-height: 100vh;
-    /* overflow: hidden; */
+    overflow-x: hidden;
+    overflow-y: auto;
 }
+
+.spotlight-demo-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 350px;
+    align-items: center;
+    justify-content: flex-start;
+    -webkit-font-smoothing: antialiased;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    height: auto;
+}
+
+p {
+    color: #ffffff00;
+}
+.spotlight-demo-container {
+    height: auto;
+}
+
+.spotlight-demo-container {
+    position: relative;
+    width: 100%;
+    overflow-x: hidden; /* Prevents horizontal scroll */
+  }
 
 p {
     color: #ffffff00;
@@ -26,12 +49,10 @@ p {
     display: flex;
     flex-direction: column;
     width: 100vw;
-    height: auto;
     min-height: 350px;
     align-items: center;
     justify-content: flex-start;
     -webkit-font-smoothing: antialiased;
-    overflow: hidden;
     padding-top: 2rem;
     /* O 40px si lo quieres más pegado arriba */
     padding-bottom: 2rem;
@@ -171,9 +192,11 @@ p {
 }
 
 .btn-secondary {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
     color: #fff;
-    border: 1.5px solid #fff;
     border-radius: 5px;
     font-weight: 600;
     transition: background 0.2s, color 0.2s, border 0.2s;
@@ -185,7 +208,6 @@ p {
 .btn-secondary:focus {
     background: #fff;
     color: #171717;
-    border: 1.5px solid #fff;
 }
 
 .btn .arrow {
@@ -493,7 +515,7 @@ p {
     color: white;
 }
 
-.spotlight-desc a{
+.spotlight-desc a {
     text-decoration: none;
     color: #a250a2;
     font-weight: 600;

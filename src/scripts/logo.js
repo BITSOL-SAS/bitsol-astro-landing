@@ -277,10 +277,10 @@ export function initLogo(container) {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         if (loadedModel) {
             // When the user has scrolled at least 100vh from the top
-            if (scrollTop > window.innerHeight / 2) {
+            if (scrollTop > window.innerHeight / 4) {
                 gsap.to(loadedModel.scene.position, {
                     x: 0,
-                    y: 300,
+                    y: 400,
                     duration: 1
                 });
                 gsap.to(loadedModel.scene.scale, {
@@ -289,10 +289,10 @@ export function initLogo(container) {
                     z: 2,
                     duration: 1
                 });
-                gsap.to(loadedModel.scene.rotation, {
-                    y: loadedModel.scene.rotation.y + Math.PI * 2,
-                    duration: 1
-                });
+                // gsap.to(loadedModel.scene.rotation, {
+                //     y: loadedModel.scene.rotation.y + Math.PI * 2,
+                //     duration: 1
+                // });
             } else {
                 gsap.to(loadedModel.scene.position, {
                     x: 0,
@@ -305,10 +305,10 @@ export function initLogo(container) {
                     z: 7,
                     duration: 1
                 });
-                gsap.to(loadedModel.scene.rotation, {
-                    y: -1.5,
-                    duration: 1
-                });
+                // gsap.to(loadedModel.scene.rotation, {
+                //     y: -1.5,
+                //     duration: 1
+                // });
             }
         }
     }, true);
