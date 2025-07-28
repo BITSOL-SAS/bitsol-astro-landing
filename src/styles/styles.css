@@ -394,6 +394,12 @@ p {
     display: block;
 }
 
+.cursor-navbar-links-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .cursor-navbar-links {
     display: flex;
     align-items: center;
@@ -414,6 +420,9 @@ p {
     align-items: center;
     opacity: 0.93;
     letter-spacing: 0.01em;
+}
+.cursor-navbar-links-group .cursor-navbar-link {
+    padding: 0.5em 0.5em;
 }
 
 .cursor-navbar-link:hover,
