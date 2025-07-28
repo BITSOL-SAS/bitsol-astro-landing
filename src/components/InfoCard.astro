@@ -28,7 +28,7 @@ const slugify = (str: string) => {
 };
 
 const titleSlug = slugify(title);
-const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
+const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''} ${!url ? 'no-url' : ''}`;
 ---
 
 <div class={cardClasses}>
@@ -116,7 +116,9 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
 
 <style>
   .info-card {
-    display: flex;
+    display: grid;
+    grid-template-columns: 450px 40px auto;
+    grid-template-areas: "image button content";
     align-items: center;
     gap: 2.5rem;
     position: relative;
@@ -126,16 +128,27 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
   }
 
   .info-card.reverse {
-    flex-direction: row-reverse;
+    grid-template-columns: auto 40px 450px;
+    grid-template-areas: "content button image";
+  }
+
+  .info-card.no-url {
+    grid-template-columns: 450px auto;
+    grid-template-areas: "image content";
+  }
+
+  .info-card.no-url.reverse {
+    grid-template-columns: auto 450px;
+    grid-template-areas: "content image";
   }
   
   .image-container {
+    grid-area: image;
     width: 450px;
     height: 320px;
     position: relative;
     cursor: pointer;
     background-color: #111;
-    flex-shrink: 0;
   }
 
   .card-image {
@@ -172,6 +185,7 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
   }
 
   .content {
+    grid-area: content;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -196,6 +210,7 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
   }
 
   .plus-button {
+    grid-area: button;
     background-color: #959494;
     color: black;
     width: 40px;
@@ -209,7 +224,6 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
     font-weight: 400;
     transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     border: 1px solid transparent;
-    flex-shrink: 0;
   }
 
   .plus-button:hover {
