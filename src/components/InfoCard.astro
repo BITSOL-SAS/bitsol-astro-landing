@@ -9,15 +9,32 @@ export interface Props {
 
 const { title, description, url, images, imagePosition = 'left' } = Astro.props;
 
+const slugify = (str: string) => {
+  str = str.replace(/^\s+|\s+$/g, ''); // trim
+  str = str.toLowerCase();
+
+  // remove accents, swap ñ for n, etc
+  const from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+  const to   = "aaaaeeeeiiiioooouuuunc------";
+  for (let i = 0, l = from.length; i < l; i++) {
+    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+  }
+
+  str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+    .replace(/\s+/g, '-') // collapse whitespace and replace by -
+    .replace(/-+/g, '-'); // collapse dashes
+
+  return str;
+};
+
+const titleSlug = slugify(title);
 const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
 ---
 
 <div class={cardClasses}>
-  <div class="image-wrapper">
-    <div class="image-container" id={`image-container-${title.replace(/\s+/g, '-')}`}>
-      <img src={images[0]} alt={title} class="card-image" />
-      <div class="grid-overlay"></div>
-    </div>
+  <div class="image-container" id={`image-container-${titleSlug}`}>
+    <img src={images[0]} alt={title} class="card-image" />
+    <div class="grid-overlay"></div>
   </div>
   <a href={url} class="plus-button">+</a>
   <div class="content">
@@ -26,14 +43,14 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
   </div>
 </div>
 
-<script define:vars={{ images, title }}>
-  document.addEventListener('astro:page-load', () => {
-    const containerId = `image-container-${title.replace(/\s+/g, '-')}`;
+<script define:vars={{ images, titleSlug }}>
+  const setupAnimation = () => {
+    const containerId = `image-container-${titleSlug}`;
     const imageContainer = document.getElementById(containerId);
 
     if (!imageContainer) return;
     
-    // Prevent setting up multiple times on HMR
+    // Prevent setting up multiple times on HMR or on multiple events
     if (imageContainer.dataset.initialized) return;
     imageContainer.dataset.initialized = 'true';
 
@@ -89,7 +106,12 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
         };
       }, 700);
     });
-  });
+  };
+  
+  // Run on initial page load
+  document.addEventListener('DOMContentLoaded', setupAnimation);
+  // Run on subsequent page transitions with Astro View Transitions
+  document.addEventListener('astro:page-load', setupAnimation);
 </script>
 
 <style>
@@ -107,16 +129,13 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
     flex-direction: row-reverse;
   }
   
-  .image-wrapper {
-    flex-shrink: 0;
-  }
-
   .image-container {
     width: 450px;
     height: 320px;
     position: relative;
     cursor: pointer;
     background-color: #111;
+    flex-shrink: 0;
   }
 
   .card-image {
@@ -197,9 +216,4 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
       color: white;
       border: 1px solid white;
   }
-
-  /* 
-    The .title and .description classes are no longer needed 
-    as we are now using global styles.
-  */
 </style> 

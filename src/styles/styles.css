@@ -549,3 +549,12 @@ p {
     width: 100vw;
     height: 100vh;
 }
+
+.page-title {
+    font-family: 'Chakra Petch', Arial, sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 2rem;
+}
