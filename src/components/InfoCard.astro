@@ -1,0 +1,205 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  url: string;
+  images: string[];
+  imagePosition?: 'left' | 'right';
+}
+
+const { title, description, url, images, imagePosition = 'left' } = Astro.props;
+
+const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
+---
+
+<div class={cardClasses}>
+  <div class="image-wrapper">
+    <div class="image-container" id={`image-container-${title.replace(/\s+/g, '-')}`}>
+      <img src={images[0]} alt={title} class="card-image" />
+      <div class="grid-overlay"></div>
+    </div>
+  </div>
+  <a href={url} class="plus-button">+</a>
+  <div class="content">
+    <h2 class="spotlight-subtitle">{title}</h2>
+    <p class="spotlight-desc">{description}</p>
+  </div>
+</div>
+
+<script define:vars={{ images, title }}>
+  document.addEventListener('astro:page-load', () => {
+    const containerId = `image-container-${title.replace(/\s+/g, '-')}`;
+    const imageContainer = document.getElementById(containerId);
+
+    if (!imageContainer) return;
+    
+    // Prevent setting up multiple times on HMR
+    if (imageContainer.dataset.initialized) return;
+    imageContainer.dataset.initialized = 'true';
+
+    const cardImage = imageContainer.querySelector('.card-image');
+    const gridOverlay = imageContainer.querySelector('.grid-overlay');
+
+    let currentImageIndex = 0;
+    let isAnimating = false;
+    const gridSize = 10;
+
+    // Create grid squares
+    if (gridOverlay.children.length === 0) {
+      for (let i = 0; i < gridSize * gridSize; i++) {
+        const square = document.createElement('div');
+        gridOverlay.appendChild(square);
+      }
+    }
+    
+    const squares = Array.from(gridOverlay.children);
+
+    imageContainer.addEventListener('click', () => {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      // Animate squares in to cover the old image
+      squares.forEach((square) => {
+        setTimeout(() => {
+          square.classList.add('visible');
+        }, Math.random() * 500);
+      });
+
+      // Wait for the cover animation to be visible
+      setTimeout(() => {
+        // Change image source
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        cardImage.src = images[currentImageIndex];
+
+        // Preload image to avoid flicker before transition out
+        const newImg = new Image();
+        newImg.src = cardImage.src;
+        newImg.onload = () => {
+            // Animate squares out to reveal the new image
+            squares.forEach((square) => {
+                setTimeout(() => {
+                    square.classList.remove('visible');
+                }, Math.random() * 500);
+            });
+
+            // End of animation
+            setTimeout(() => {
+                isAnimating = false;
+            }, 500);
+        };
+      }, 700);
+    });
+  });
+</script>
+
+<style>
+  .info-card {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    position: relative;
+    max-width: 1024px;
+    margin: 6rem auto;
+    padding: 2rem;
+  }
+
+  .info-card.reverse {
+    flex-direction: row-reverse;
+  }
+  
+  .image-wrapper {
+    flex-shrink: 0;
+  }
+
+  .image-container {
+    width: 450px;
+    height: 320px;
+    position: relative;
+    cursor: pointer;
+    background-color: #111;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    pointer-events: none;
+  }
+
+  .grid-overlay > div {
+    background-color: #18181b; /* Dark color for the transition */
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+  }
+
+  .grid-overlay > div.visible {
+    opacity: 1;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    color: white;
+  }
+
+  /* Overrides for global classes within the component */
+  .content :global(.spotlight-subtitle) {
+    text-align: left;
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  .content :global(.spotlight-desc) {
+    text-align: left;
+    margin: 0;
+    line-height: 1.6;
+    max-width: 400px;
+    color: #e0e0e0;
+  }
+
+  .plus-button {
+    background-color: #959494;
+    color: black;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 400;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border: 1px solid transparent;
+    flex-shrink: 0;
+  }
+
+  .plus-button:hover {
+      transform: scale(1.1);
+      background-color: black;
+      color: white;
+      border: 1px solid white;
+  }
+
+  /* 
+    The .title and .description classes are no longer needed 
+    as we are now using global styles.
+  */
+</style> 

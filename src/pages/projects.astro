@@ -1,12 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import InfoCard from '../components/InfoCard.astro';
+
 ---
 
 <Layout title="BITSOL - Proyectos">
   <div style="width: 100vw">
-    <div class="spotlight-content">
       <h1 class="spotlight-title">Proyectos</h1>
-      
-    </div>
+
+      <InfoCard 
+      title="Un título de ejemplo"
+      description="Esta es una descripción de ejemplo para el componente que acabamos de crear. Puedes poner aquí la información que desees y se mostrará junto a la imagen interactiva."
+      url="#"
+      images={["/imgs/imagen_01.png", "/imgs/imagen_02.png"]}
+    />
+
+    <InfoCard 
+      title="Otro ejemplo con imagen a la derecha"
+      description="Esta es una descripción de ejemplo para el componente que acabamos de crear. Puedes poner aquí la información que desees y se mostrará junto a la imagen interactiva."
+      url="#"
+      images={["/imgs/imagen_02.png", "/imgs/imagen_01.png"]}
+      imagePosition="right"
+    />    
   </div>
 </Layout>
