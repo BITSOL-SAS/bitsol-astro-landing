@@ -2,7 +2,7 @@
 export interface Props {
   title: string;
   description: string;
-  url: string;
+  url?: string;
   images: string[];
   imagePosition?: 'left' | 'right';
 }
@@ -36,7 +36,7 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
     <img src={images[0]} alt={title} class="card-image" />
     <div class="grid-overlay"></div>
   </div>
-  <a href={url} class="plus-button">+</a>
+  {url && <a href={url} class="plus-button">+</a>}
   <div class="content">
     <h2 class="spotlight-subtitle">{title}</h2>
     <p class="spotlight-desc">{description}</p>
@@ -79,7 +79,7 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
       squares.forEach((square) => {
         setTimeout(() => {
           square.classList.add('visible');
-        }, Math.random() * 500);
+        }, Math.random() * 1200); // Increased duration for a slower effect
       });
 
       // Wait for the cover animation to be visible
@@ -96,15 +96,15 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
             squares.forEach((square) => {
                 setTimeout(() => {
                     square.classList.remove('visible');
-                }, Math.random() * 500);
+                }, Math.random() * 1200); // Increased duration for a slower effect
             });
 
             // End of animation
             setTimeout(() => {
                 isAnimating = false;
-            }, 500);
+            }, 1200); // Match the animation duration
         };
-      }, 700);
+      }, 1400); // A bit longer than the animation duration
     });
   };
   
@@ -145,6 +145,7 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1; /* Keep image on the bottom layer */
   }
 
   .grid-overlay {
@@ -157,12 +158,13 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''}`;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
     pointer-events: none;
+    z-index: 2; /* Ensure overlay is on top of the image */
   }
 
   .grid-overlay > div {
-    background-color: #18181b; /* Dark color for the transition */
+    background-color: #fff; /* White squares for a visible transition */
     opacity: 0;
-    transition: opacity 0.25s ease-in-out;
+    transition: opacity 1s ease-in-out; /* Slower fade for each square */
   }
 
   .grid-overlay > div.visible {
