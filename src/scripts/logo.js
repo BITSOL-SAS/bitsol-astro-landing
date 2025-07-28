@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import model from '../assets/bitsol.glb';
 import { gsap } from 'gsap';
 
-export function initLogo(container) {
+export function initLogo(container, showModel = false) {
     if (!container) {
         console.error("Container for logo not found");
         return;
@@ -150,37 +150,39 @@ export function initLogo(container) {
     const gltfLoader = new GLTFLoader();
     let loadedModel = null;
 
-    gltfLoader.load(model, function (gltf) {
-        scene.add(gltf.scene);
-        // save the model in a variable
-        loadedModel = gltf;
-        // scale the model
-        gltf.scene.scale.set(7, 7, 7);
-        // rotate the model
-        gltf.scene.rotation.y = -1.5;
-        gltf.scene.position.z = 50;
-        gltf.scene.position.x = 0;
+    if (showModel) {
+        gltfLoader.load(model, function (gltf) {
+            scene.add(gltf.scene);
+            // save the model in a variable
+            loadedModel = gltf;
+            // scale the model
+            gltf.scene.scale.set(7, 7, 7);
+            // rotate the model
+            gltf.scene.rotation.y = -1.5;
+            gltf.scene.position.z = 50;
+            gltf.scene.position.x = 0;
 
-        // change to wireframe
-        // start the of the model
-        const mixer = new THREE.AnimationMixer(gltf.scene);
+            // change to wireframe
+            // start the of the model
+            const mixer = new THREE.AnimationMixer(gltf.scene);
 
-        // Animation loop
-        const clock = new THREE.Clock();
-        function animate_logo() {
-            requestAnimationFrame(animate_logo);
+            // Animation loop
+            const clock = new THREE.Clock();
+            function animate_logo() {
+                requestAnimationFrame(animate_logo);
 
-            // Update the animation mixer on each frame
-            const delta = clock.getDelta();
-            mixer.update(delta);
+                // Update the animation mixer on each frame
+                const delta = clock.getDelta();
+                mixer.update(delta);
 
-            renderer.render(scene, camera);
-        }
+                renderer.render(scene, camera);
+            }
 
-        // animate_logo(); // This is not needed as the main animate() calls render
-    }, undefined, function (error) {
-        console.error(error);
-    });
+            // animate_logo(); // This is not needed as the main animate() calls render
+        }, undefined, function (error) {
+            console.error(error);
+        });
+    }
 
     camera.position.z = 500;
     var gyroPresent = false;
@@ -273,45 +275,47 @@ export function initLogo(container) {
         renderer.render(scene, camera);
     }
 
-    document.addEventListener('scroll', (event) => {
-        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        if (loadedModel) {
-            // When the user has scrolled at least 100vh from the top
-            if (scrollTop > window.innerHeight / 4) {
-                gsap.to(loadedModel.scene.position, {
-                    x: 0,
-                    y: 400,
-                    duration: 1
-                });
-                gsap.to(loadedModel.scene.scale, {
-                    x: 2,
-                    y: 2,
-                    z: 2,
-                    duration: 1
-                });
-                // gsap.to(loadedModel.scene.rotation, {
-                //     y: loadedModel.scene.rotation.y + Math.PI * 2,
-                //     duration: 1
-                // });
-            } else {
-                gsap.to(loadedModel.scene.position, {
-                    x: 0,
-                    y: 0,
-                    duration: 1
-                });
-                gsap.to(loadedModel.scene.scale, {
-                    x: 7,
-                    y: 7,
-                    z: 7,
-                    duration: 1
-                });
-                // gsap.to(loadedModel.scene.rotation, {
-                //     y: -1.5,
-                //     duration: 1
-                // });
+    if (showModel) {
+        document.addEventListener('scroll', (event) => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            if (loadedModel) {
+                // When the user has scrolled at least 100vh from the top
+                if (scrollTop > window.innerHeight / 4) {
+                    gsap.to(loadedModel.scene.position, {
+                        x: 0,
+                        y: 400,
+                        duration: 1
+                    });
+                    gsap.to(loadedModel.scene.scale, {
+                        x: 2,
+                        y: 2,
+                        z: 2,
+                        duration: 1
+                    });
+                    // gsap.to(loadedModel.scene.rotation, {
+                    //     y: loadedModel.scene.rotation.y + Math.PI * 2,
+                    //     duration: 1
+                    // });
+                } else {
+                    gsap.to(loadedModel.scene.position, {
+                        x: 0,
+                        y: 0,
+                        duration: 1
+                    });
+                    gsap.to(loadedModel.scene.scale, {
+                        x: 7,
+                        y: 7,
+                        z: 7,
+                        duration: 1
+                    });
+                    // gsap.to(loadedModel.scene.rotation, {
+                    //     y: -1.5,
+                    //     duration: 1
+                    // });
+                }
             }
-        }
-    }, true);
+        }, true);
+    }
 
     window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
