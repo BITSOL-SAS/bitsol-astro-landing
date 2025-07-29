@@ -1,40 +1,66 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import InfoCard from '../../../components/InfoCard.astro';
-import CarruselBlogPost from '../../../components/CarruselBlogPost.astro';
+import Layout from "../../../layouts/Layout.astro";
+import CarruselBlogPost from "../../../components/CarruselBlogPost.astro";
 
 const archihubSlides = [
-  {
-    image: "/imgs/archihub/3.jpg",
-    caption: "ArchiHUB revolutionizes document management with open-source technology"
-  },
-  {
-    image: "/imgs/archihub/4.jpg",
-    caption: "Innovative technology to preserve historical memory digitally"
-  },
-  {
-    image: "/imgs/archihub/6.jpg",
-    caption: "Integrated environmental sensors to create natural memory archives"
-  },
-  {
-    image: "/imgs/archihub/7.jpg",
-    caption: "A platform that weaves narratives through information systematization"
-  }
+    {
+        image: "/imgs/carruselArchihub/archihub_01.jpg",
+        caption: "General view of galleries and cataloging data",
+    },
+    {
+        image: "/imgs/carruselArchihub/archihub_02.jpg",
+        caption: "Automatic transcription for videos with speaker statistics",
+    },
+    {
+        image: "/imgs/carruselArchihub/archihub_03.jpg",
+        caption: "Cataloging and advanced metadata editing modules",
+    },
+];
+
+const archihubSlides2 = [
+    {
+        image: "/imgs/carruselArchihub/archihub_04.jpg",
+        caption: "You can create Python processings and integrate them into ArchiHUB to apply them massively or individually to your documents",
+    },
+    {
+        image: "/imgs/carruselArchihub/archihub_05.jpg",
+        caption: "Edit the results of your processings",
+    },
 ];
 ---
 
 <Layout title="BITSOL - ArchiHUB">
-  <CarruselBlogPost slides={archihubSlides} />
-  
-  <div style="width: 100vw; padding: 4rem 2rem;">
-    <div class="spotlight-content" id="archihub">
-      <h1 class="spotlight-subtitle">What is ArchiHUB?</h1>
-      <div class="spotlight-desc">
-        ArchiHUB is a Colombian open-source application that seeks to weave narratives through the
-        systematization of information, whether with institutional documents, historical archives or natural data.
-        You can go to the <a href="https://github.com/Archihub-App">repository</a> and the <a
-          href="https://archihub-app.github.io/archihub.github.io/">official documentation</a> to learn more!
-      </div>
+    <div style="width: 100vw;">
+        <div class="spotlight-content" id="archihub">
+            <h1 class="spotlight-subtitle">What is ArchiHUB?</h1>
+            <div class="spotlight-desc">
+                ArchiHUB is a Colombian open-source application that seeks to weave narratives through the systematization of information, whether with institutional documents, historical archives, or natural data. You can go to the <a
+                    href="https://github.com/Archihub-App">repository</a> and the <a
+                    href="https://archihub-app.github.io/archihub.github.io/"
+                    >official documentation</a> to learn more!
+            </div>
+            <CarruselBlogPost slides={archihubSlides} />
+            <div class="spotlight-desc">
+                It combines all types of information: from organized data to free texts, and even data captured by sensors or extracted from natural systems and conversations, like Telegram chats. All this is made possible by its practical plugins. In addition, ArchiHUB is largely open-source, which allows you to use it on your own computer or server and create your own API easily and customized. A flexible solution to keep your information your way!
+            </div>
+            <CarruselBlogPost slides={archihubSlides2} />
+            <div class="spotlight-desc">
+                ArchiHUB is designed to organize your information in a practical way and, at the same time, help you weave stories with it. You can take advantage of our free interface to get started easily or, if you prefer, design your own interfaces to interact with your files and share them as you wish. You decide how to bring your data to life!
+            </div>
+            <h2 class="spotlight-subtitle-subtitular">
+                Learn more about the project
+            </h2>
+            <div class="spotlight-desc">
+                You can get more information about the project by reading some of our publications on the subject or by requesting a demonstration.
+            </div>
+            <div class="spotlight-desc questions-list">
+                <a href="#">What is ArchiHUB?</a>
+                <a href="#">The Web 3.0 revolution might not be so much about cryptocurrencies, but rather revolve around our memories</a>
+                <a href="#">The 21st-century digital archive and memes</a>
+                <a href="#">Museums, Information Systems, and Inclusive Narratives for the Afro, Raizal, and Palenquera Communities in Colombia</a>
+                <a href="#">Guardians of Time: Digital Tools, Knowledge, and Traditional Practices</a>
+                <a href="#">Open source and the post-agreement</a>
+            </div>
+        </div>
     </div>
-  </div>
 </Layout>

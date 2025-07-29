@@ -2,12 +2,12 @@
 import Layout from '../../../layouts/Layout.astro';
 import InfoCard from '../../../components/InfoCard.astro';
 
-// Obtener el idioma actual
+// Get current language
 const currentPath = Astro.url.pathname;
 const isEnglish = currentPath.startsWith('/en/') || currentPath === '/en';
 const currentLang = isEnglish ? 'en' : 'es';
 
-// URLs según el idioma
+// URLs based on language
 const archihubUrl = '/' + currentLang + '/projects/archihub'
 const monitorUrl = '/' + currentLang + '/projects/archihub';
 
@@ -25,8 +25,8 @@ const monitorUrl = '/' + currentLang + '/projects/archihub';
     />
 
     <InfoCard 
-      title="ArchiHUB natural monitor"
-      description="ArchiHUB's flexibility allows it to be used as a powerful information system to build a natural memory archive"
+      title="ArchiHUB Natural Monitor"
+      description="The flexibility of ArchiHUB allows it to be used as a powerful information system to build a natural memory archive."
       url={monitorUrl}
       images={["/imgs/archihubnature/1.jpg", "/imgs/archihubnature/3.jpg"]}
       imagePosition="right"
