@@ -1,0 +1,43 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import CarruselBlogPost from "../../../components/CarruselBlogPost.astro";
+
+const archihubSlides = [
+    {
+        image: "/imgs/archihubnaturepage/presentacion_01.jpg",
+        caption: "Sistema modular para conectar distintas combinaciones de sensores a la plataforma",
+    },
+    {
+        image: "/imgs/archihubnaturepage/presentacion_02.jpg",
+        caption: "Prototipo de camara conectada a ArchiHUB para la recolección de información de una huerta hidropónica",
+    }
+];
+
+---
+
+<Layout title="BITSOL - ArchiHUB">
+    <div style="width: 100vw;">
+        <div class="spotlight-content" id="archihub">
+            <h1 class="spotlight-subtitle">Archihub y la naturaleza            </h1>
+            <div class="spotlight-desc">
+                Puede parecer inusual pensar en un sistema de gestión documental como una herramienta versátil para capturar datos en entornos naturales, pero eso es precisamente lo que ofrece ArchiHUB.
+
+            </div>
+            <CarruselBlogPost slides={archihubSlides} />
+            
+            <div class="spotlight-desc">
+                ArchiHub te ofrece la posibilidad de conectar una amplia gama de sensores para recolectar información, además de interfaces que te permiten realizar acciones en el mundo real, todo directamente desde la aplicación. ¡Una manera simple y práctica de unir el mundo digital con el físico!
+                
+            </div>
+            <img src="/imgs/archihubnaturepage/sensors.svg" class="spotlight-image" alt="ArchiHUB Natural Monitor">
+            <div class="spotlight-desc questions-list">
+                <a href="#">What is ArchiHUB?</a>
+                <a href="#">The Web 3.0 revolution might not be so much about cryptocurrencies, but rather revolve around our memories</a>
+                <a href="#">The 21st-century digital archive and memes</a>
+                <a href="#">Museums, Information Systems, and Inclusive Narratives for the Afro, Raizal, and Palenquera Communities in Colombia</a>
+                <a href="#">Guardians of Time: Digital Tools, Knowledge, and Traditional Practices</a>
+                <a href="#">Open source and the post-agreement</a>
+            </div>
+        </div>
+    </div>
+</Layout>

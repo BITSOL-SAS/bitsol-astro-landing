@@ -192,6 +192,13 @@ p {
     flex-wrap: wrap;
     margin-bottom: 60px;
 }
+.spotlight-image{
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
 
 .btn {
     font-family: 'Chakra Petch', Arial, sans-serif;
