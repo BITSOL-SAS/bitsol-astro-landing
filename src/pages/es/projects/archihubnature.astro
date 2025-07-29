@@ -1,7 +1,8 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
 import CarruselBlogPost from "../../../components/CarruselBlogPost.astro";
-
+import Sensors from "../../../components/sensors.astro";
+import Motors from "../../../components/motors.astro";
 const archihubSlides = [
     {
         image: "/imgs/archihubnaturepage/presentacion_01.jpg",
@@ -10,6 +11,16 @@ const archihubSlides = [
     {
         image: "/imgs/archihubnaturepage/presentacion_02.jpg",
         caption: "Prototipo de camara conectada a ArchiHUB para la recolección de información de una huerta hidropónica",
+    }
+];
+const archihubSlides2 = [
+    {
+        image: "/imgs/archihubnaturepage/archihub_01.jpg",
+        caption: "Vista desde el aplicativo de la captura de una cámara conectada al sistema y programada para tomar una foto a intervalos regulares",
+    },
+    {
+        image: "/imgs/archihubnaturepage/archihub_02.jpg",
+        caption: "Vista de los registros e interfaz de control para la huerta hidropónica",
     }
 ];
 
@@ -29,14 +40,31 @@ const archihubSlides = [
                 ArchiHub te ofrece la posibilidad de conectar una amplia gama de sensores para recolectar información, además de interfaces que te permiten realizar acciones en el mundo real, todo directamente desde la aplicación. ¡Una manera simple y práctica de unir el mundo digital con el físico!
                 
             </div>
-            <img src="/imgs/archihubnaturepage/sensors.svg" class="spotlight-image" alt="ArchiHUB Natural Monitor">
+            <Sensors />
+            <div class="spotlight-desc">
+                En ArchiHub sabemos que la memoria va más allá de solo registrar y archivar: también se trata de cómo la ponemos en acción. Por eso, te ofrecemos plugins que te permiten interactuar con interfaces del mundo real, ya sea para capturar información o para activar sistemas motorizados. ¡Una forma sencilla y efectiva de dar vida a tus datos y conectar con el entorno!
+
+            </div>
+
+            <Motors />
+            <div class="spotlight-desc">
+                Debido a que fue diseñado como un sistema que busca abarcar la totalidad de la memoria como base para un proyecto artístico, ArchiHUB reconoce que la memoria no es exclusivamente humana. Al organizar y sistematizar datos de la naturaleza, tejemos una narrativa y construimos una memoria natural.
+
+            </div>
+            <CarruselBlogPost slides={archihubSlides2} />
+            <div class="spotlight-desc">
+                Actualmente estamos trabajando en aplicaciones para estaciones meteorológicas pequeñas y cultivos hidropónicos. Hemos integrado ArchiHUB para la recolección, procesamiento y publicación de datos a través de aplicaciones de mensajería instantánea.
+
+            </div>
+
+            <img src="/imgs/archihubnaturepage/presentacion_03.jpg" alt="ArchiHUB Natural Monitor" class="spotlight-image">
+
+            <div class="spotlight-desc">
+                A medida que avancemos, implementaremos más detalles sobre las posibilidades. Mientras tanto, puedes consultar la siguiente publicación, que describe conceptualmente el propósito de este proyecto.
+
+            </div>
             <div class="spotlight-desc questions-list">
-                <a href="#">What is ArchiHUB?</a>
-                <a href="#">The Web 3.0 revolution might not be so much about cryptocurrencies, but rather revolve around our memories</a>
-                <a href="#">The 21st-century digital archive and memes</a>
-                <a href="#">Museums, Information Systems, and Inclusive Narratives for the Afro, Raizal, and Palenquera Communities in Colombia</a>
-                <a href="#">Guardians of Time: Digital Tools, Knowledge, and Traditional Practices</a>
-                <a href="#">Open source and the post-agreement</a>
+                <a href="#">Hacia una Conciencia Terrestre a Través de la Memoria Natural</a>
             </div>
         </div>
     </div>

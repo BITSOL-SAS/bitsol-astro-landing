@@ -198,6 +198,8 @@ p {
     height: auto;
     object-fit: cover;
     border-radius: 8px;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
 }
 
 .btn {
