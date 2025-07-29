@@ -1,6 +1,15 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import InfoCard from '../../components/InfoCard.astro';
+import Layout from '../../../layouts/Layout.astro';
+import InfoCard from '../../../components/InfoCard.astro';
+
+// Obtener el idioma actual
+const currentPath = Astro.url.pathname;
+const isEnglish = currentPath.startsWith('/en/') || currentPath === '/en';
+const currentLang = isEnglish ? 'en' : 'es';
+
+// URLs según el idioma
+const archihubUrl = '/' + currentLang + '/projects/archihub'
+const monitorUrl = '/' + currentLang + '/projects/archihub';
 
 ---
 
@@ -11,14 +20,14 @@ import InfoCard from '../../components/InfoCard.astro';
       <InfoCard 
       title="ArchiHUB"
       description="ArchiHUB is a Colombian open-source project that seeks to organize and facilitate access to historical memory."
-      url="#"
+      url={archihubUrl}
       images={["/imgs/archihub/3.jpg", "/imgs/archihub/4.jpg", "/imgs/archihub/6.jpg", "/imgs/archihub/7.jpg"]}
     />
 
     <InfoCard 
       title="ArchiHUB natural monitor"
       description="ArchiHUB's flexibility allows it to be used as a powerful information system to build a natural memory archive"
-      url="/whatsapp"
+      url={monitorUrl}
       images={["/imgs/archihubnature/1.jpg", "/imgs/archihubnature/3.jpg"]}
       imagePosition="right"
     />    
