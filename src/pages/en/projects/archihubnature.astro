@@ -1,0 +1,72 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import CarruselBlogPost from "../../../components/CarruselBlogPost.astro";
+import SensorsEn from "../../../components/sensors-en.astro";
+import MotorsEn from "../../../components/motors-en.astro";
+
+const archihubSlides = [
+    {
+        image: "/imgs/archihubnaturepage/presentacion_01.jpg",
+        caption: "Modular system to connect different combinations of sensors to the platform",
+    },
+    {
+        image: "/imgs/archihubnaturepage/presentacion_02.jpg",
+        caption: "Camera prototype connected to ArchiHUB for information collection from a hydroponic garden",
+    }
+];
+
+const archihubSlides2 = [
+    {
+        image: "/imgs/archihubnaturepage/archihub_01.jpg",
+        caption: "View from the application showing the capture of a camera connected to the system and programmed to take a photo at regular intervals",
+    },
+    {
+        image: "/imgs/archihubnaturepage/archihub_02.jpg",
+        caption: "View of records and control interface for the hydroponic garden",
+    }
+];
+
+---
+
+<Layout title="BITSOL - ArchiHUB">
+    <div style="width: 100vw;">
+        <div class="spotlight-content" id="archihub">
+            <h1 class="spotlight-subtitle">ArchiHUB and Nature</h1>
+            <div class="spotlight-desc">
+                It may seem unusual to think of a document management system as a versatile tool for capturing data in natural environments, but that's precisely what ArchiHUB offers.
+            </div>
+            <CarruselBlogPost slides={archihubSlides} />
+            
+            <div class="spotlight-desc">
+                ArchiHUB offers you the possibility to connect a wide range of sensors to collect information, plus interfaces that allow you to perform actions in the real world, all directly from the application. A simple and practical way to unite the digital world with the physical one!
+            </div>
+            <SensorsEn />
+            
+            <div class="spotlight-desc">
+                At ArchiHUB we know that memory goes beyond just recording and archiving: it's also about how we put it into action. That's why we offer you plugins that allow you to interact with real-world interfaces, whether to capture information or to activate motorized systems. A simple and effective way to bring your data to life and connect with the environment!
+            </div>
+
+            <MotorsEn />
+
+            <div class="spotlight-desc">
+                Because it was designed as a system that seeks to encompass the totality of memory as the basis for an artistic project, ArchiHUB recognizes that memory is not exclusively human. By organizing and systematizing data from nature, we weave a narrative and build a natural memory.
+            </div>
+            
+            <CarruselBlogPost slides={archihubSlides2} />
+            
+            <div class="spotlight-desc">
+                We are currently working on applications for small weather stations and hydroponic crops. We have integrated ArchiHUB for data collection, processing and publication through instant messaging applications.
+            </div>
+
+            <img src="/imgs/archihubnaturepage/presentacion_03.jpg" alt="ArchiHUB Natural Monitor" class="spotlight-image">
+
+            <div class="spotlight-desc">
+                As we move forward, we will implement more details about the possibilities. In the meantime, you can check out the following publication, which conceptually describes the purpose of this project.
+            </div>
+            
+            <div class="spotlight-desc questions-list">
+                <a href="#">Towards an Earth Consciousness Through Natural Memory</a>
+            </div>
+        </div>
+    </div>
+</Layout>
