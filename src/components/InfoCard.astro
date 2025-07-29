@@ -114,3 +114,149 @@ const cardClasses = `info-card ${imagePosition === 'right' ? 'reverse' : ''} ${!
   document.addEventListener('astro:page-load', setupAnimation);
 </script>
 
+<style>
+  .info-card {
+    display: grid;
+    grid-template-columns: 450px 40px auto;
+    grid-template-areas: "image button content";
+    align-items: center;
+    gap: 2.5rem;
+    position: relative;
+    max-width: 1024px;
+    margin: 6rem auto;
+    padding: 2rem;
+  }
+
+  .info-card.reverse {
+    grid-template-columns: auto 40px 450px;
+    grid-template-areas: "content button image";
+  }
+
+  .info-card.no-url {
+    grid-template-columns: 450px auto;
+    grid-template-areas: "image content";
+    gap: 7rem;
+  }
+
+  .info-card.no-url.reverse {
+    grid-template-columns: auto 450px;
+    grid-template-areas: "content image";
+    gap: 7rem;
+  }
+  
+  .image-container {
+    grid-area: image;
+    width: 450px;
+    height: 320px;
+    position: relative;
+    cursor: pointer;
+    background-color: #111;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Keep image on the bottom layer */
+  }
+
+  .grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    pointer-events: none;
+    z-index: 2; /* Ensure overlay is on top of the image */
+  }
+
+  .grid-overlay > div {
+    background-color: #fff; /* White squares for a visible transition */
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* Slower fade for each square */
+  }
+
+  .grid-overlay > div.visible {
+    opacity: 1;
+  }
+
+  .content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    color: white;
+  }
+
+  /* Alineación cuando la imagen está a la izquierda (posición por defecto) */
+  .info-card .content {
+    align-items: flex-start;
+  }
+
+  .info-card .content :global(.spotlight-subtitle) {
+    text-align: left;
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  .info-card .content :global(.spotlight-desc) {
+    text-align: left;
+    margin: 0;
+    line-height: 1.6;
+    max-width: 400px;
+    color: #e0e0e0;
+  }
+
+  /* Alineación cuando la imagen está a la derecha (reverse) */
+  .info-card.reverse .content {
+    align-items: flex-end;
+  }
+
+  .info-card.reverse .content :global(.spotlight-subtitle) {
+    text-align: right;
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  .info-card.reverse .content :global(.spotlight-desc) {
+    text-align: right;
+    margin: 0;
+    line-height: 1.6;
+    max-width: 400px;
+    color: #e0e0e0;
+  }
+
+  .plus-button {
+    grid-area: button;
+    background-color: #959494;
+    color: black;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 400;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border: 1px solid transparent;
+  }
+
+  .plus-button:hover {
+      transform: scale(1.1);
+      background-color: black;
+      color: white;
+      border: 1px solid white;
+  }
+</style>
+
