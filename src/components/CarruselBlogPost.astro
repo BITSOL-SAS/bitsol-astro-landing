@@ -1,0 +1,148 @@
+---
+export interface Props {
+  slides: {
+    image: string;
+    caption: string;
+  }[];
+}
+
+const { slides } = Astro.props;
+---
+
+<style>
+  .blog-carousel-container {
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+  }
+
+  .blog-carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .blog-carousel-slide {
+    flex: 0 0 100vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .blog-carousel-image {
+    width: 60%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .blog-carousel-caption {
+    font-family: 'Bitter', serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #eaeaea;
+    text-align: center;
+    margin: 0;
+    line-height: 1.5;
+    max-width: 600px;
+    opacity: 0.92;
+    letter-spacing: 0.01em;
+  }
+
+  @media (max-width: 768px) {
+    .blog-carousel-image {
+      width: 80%;
+      max-height: 50vh;
+    }
+
+    .blog-carousel-caption {
+      font-size: 0.8rem;
+    }
+
+    .blog-carousel-slide {
+      padding: 1rem;
+    }
+  }
+</style>
+
+<div class="blog-carousel-container" id="blog-carousel">
+  <div class="blog-carousel-track">
+    {slides.map((slide, index) => (
+      <div class="blog-carousel-slide" data-index={index}>
+        <img src={slide.image} alt={slide.caption} class="blog-carousel-image" />
+        <p class="blog-carousel-caption">{slide.caption}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  const carousel = document.getElementById('blog-carousel');
+  if (!carousel) return;
+
+  const track = carousel.querySelector('.blog-carousel-track');
+  const slides = Array.from(carousel.querySelectorAll('.blog-carousel-slide'));
+
+  let currentSlide = 0;
+
+  function updateCarousel() {
+    if (track) {
+      (track as HTMLElement).style.transform = `translateX(-${currentSlide * 100}vw)`;
+    }
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateCarousel();
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      prevSlide();
+    } else if (e.key === 'ArrowRight') {
+      nextSlide();
+    }
+  });
+
+  // Touch/swipe navigation
+  let startX = 0;
+  let endX = 0;
+
+  carousel.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  carousel.addEventListener('touchend', (e) => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = startX - endX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+  }
+
+  // Initialize
+  updateCarousel();
+</script> 
