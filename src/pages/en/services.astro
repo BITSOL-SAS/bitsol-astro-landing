@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import InfoCard from '../../components/InfoCard.astro';
+
+---
+
+<Layout title="BITSOL - Services">
+  <div style="width: 100vw">
+      <h1 class="page-title">Services</h1>
+
+      <InfoCard 
+      title="Specialized data visualization"
+      description="We create custom visualizations to help you understand your data, including maps, timelines and other interactive designs."
+      images={["/imgs/datosEspecializada/2.jpg", "/imgs/datosEspecializada/3.jpg", "/imgs/datosEspecializada/4.jpg"]}
+    />
+
+    <InfoCard 
+      title="Custom AI models"
+      description="ArchiHUB allows you to run specialized AI models to extract information from images and documents. We can help you train a model that fits your needs."
+      images={["/imgs/models.jpg"]}
+      imagePosition="right"
+    />    
+
+    <InfoCard 
+    title="ArchiHUB support"
+    description="We can help you deploy and configure ArchiHUB for your organization. This support also includes migrating any information you may have, so you get a fully functional installation with all the information that matters to you."
+    images={["/imgs/support.jpg"]}
+  />
+
+  <InfoCard 
+  title="Custom user interface"
+  description="We can help you design a user interface that is easy to use and helps you get the most out of your information, whether on web, mobile or virtual reality."
+  images={["/imgs/customui.jpg"]}
+  imagePosition="right"
+/>   
+
+  </div>
+</Layout> 

@@ -1,17 +1,75 @@
 ---
+// Obtener la ruta actual para determinar el idioma
+const currentPath = Astro.url.pathname;
+const isEnglish = currentPath.startsWith('/en/') || currentPath === '/en';
+const currentLang = isEnglish ? 'en' : 'es';
+
+// Obtener la ruta actual sin el prefijo de idioma
+const currentPathWithoutLang = currentPath.replace(/^\/(en|es)/, '') || '/';
+const oppositePath = isEnglish ? `/es${currentPathWithoutLang}` : `/en${currentPathWithoutLang}`;
 ---
+
 <style>
+  .language-switcher {
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+  }
+
+  .language-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .language-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .language-btn.active {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .flag-icon {
+    width: 20px;
+    height: 15px;
+    border-radius: 2px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .language-switcher {
+      margin-left: 8px;
+    }
+    
+    .flag-icon {
+      width: 18px;
+      height: 13px;
+    }
+  }
 </style>
 
 <nav class="cursor-navbar">
   <div class="cursor-navbar-inner">
     <!-- Links -->
     <div class="cursor-navbar-links">
-      <a href="/" class="cursor-navbar-link">ArchiHUB</a>
+      <a href={currentLang === 'es' ? '/es/' : '/en/'} class="cursor-navbar-link">ArchiHUB</a>
       <div class="cursor-navbar-links-group">
-        <a href="/#about" class="cursor-navbar-link">Acerca</a>
-        <a href="/services" class="cursor-navbar-link">Servicios</a>
-        <a href="/projects" class="cursor-navbar-link">Proyectos</a>
+        <a href={currentLang === 'es' ? '/es/#about' : '/en/#about'} class="cursor-navbar-link">
+          {currentLang === 'es' ? 'Acerca' : 'About'}
+        </a>
+        <a href={currentLang === 'es' ? '/es/services' : '/en/services'} class="cursor-navbar-link">
+          {currentLang === 'es' ? 'Servicios' : 'Services'}
+        </a>
+        <a href={currentLang === 'es' ? '/es/projects' : '/en/projects'} class="cursor-navbar-link">
+          {currentLang === 'es' ? 'Proyectos' : 'Projects'}
+        </a>
       </div>
       <div class="cursor-navbar-links-divider"></div>
     </div>
@@ -20,7 +78,99 @@
       <a href="https://github.com/Archihub-App" class="cursor-navbar-user" target="_blank" rel="noopener" aria-label="GitHub">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 21.13V24"/></svg>
       </a>
-      <a href="#" class="cursor-navbar-user text">Descargar</a>
+      <a href="#" class="cursor-navbar-user text">
+        {currentLang === 'es' ? 'Descargar' : 'Download'}
+      </a>
+      <div class="language-switcher">
+        <button 
+          class={`language-btn ${currentLang === 'es' ? 'active' : ''}`} 
+          onclick={`window.location.href='/es${currentPathWithoutLang}'`}
+          title="Español"
+        >
+          <!-- Bandera de Colombia -->
+          <svg class="flag-icon" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+            <rect width="900" height="600" fill="#FCD116"/>
+            <rect width="900" height="300" y="300" fill="#003893"/>
+            <rect width="900" height="150" y="450" fill="#CE1126"/>
+          </svg>
+        </button>
+        <button 
+          class={`language-btn ${currentLang === 'en' ? 'active' : ''}`} 
+          onclick={`window.location.href='/en${currentPathWithoutLang}'`}
+          title="English"
+        >
+          <!-- Bandera de Estados Unidos -->
+          <svg class="flag-icon" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+            <rect width="900" height="600" fill="#B22234"/>
+            <rect width="900" height="46.15" y="0" fill="#FFFFFF"/>
+            <rect width="900" height="46.15" y="92.3" fill="#FFFFFF"/>
+            <rect width="900" height="46.15" y="184.6" fill="#FFFFFF"/>
+            <rect width="900" height="46.15" y="276.9" fill="#FFFFFF"/>
+            <rect width="900" height="46.15" y="369.2" fill="#FFFFFF"/>
+            <rect width="900" height="46.15" y="461.5" fill="#FFFFFF"/>
+            <rect width="900" height="46.15" y="553.8" fill="#FFFFFF"/>
+            <rect width="360" height="323.1" fill="#3C3B6E"/>
+            <!-- Estrellas -->
+            <g fill="#FFFFFF">
+              <circle cx="30" cy="30" r="3"/>
+              <circle cx="90" cy="30" r="3"/>
+              <circle cx="150" cy="30" r="3"/>
+              <circle cx="210" cy="30" r="3"/>
+              <circle cx="270" cy="30" r="3"/>
+              <circle cx="330" cy="30" r="3"/>
+              <circle cx="60" cy="60" r="3"/>
+              <circle cx="120" cy="60" r="3"/>
+              <circle cx="180" cy="60" r="3"/>
+              <circle cx="240" cy="60" r="3"/>
+              <circle cx="300" cy="60" r="3"/>
+              <circle cx="30" cy="90" r="3"/>
+              <circle cx="90" cy="90" r="3"/>
+              <circle cx="150" cy="90" r="3"/>
+              <circle cx="210" cy="90" r="3"/>
+              <circle cx="270" cy="90" r="3"/>
+              <circle cx="330" cy="90" r="3"/>
+              <circle cx="60" cy="120" r="3"/>
+              <circle cx="120" cy="120" r="3"/>
+              <circle cx="180" cy="120" r="3"/>
+              <circle cx="240" cy="120" r="3"/>
+              <circle cx="300" cy="120" r="3"/>
+              <circle cx="30" cy="150" r="3"/>
+              <circle cx="90" cy="150" r="3"/>
+              <circle cx="150" cy="150" r="3"/>
+              <circle cx="210" cy="150" r="3"/>
+              <circle cx="270" cy="150" r="3"/>
+              <circle cx="330" cy="150" r="3"/>
+              <circle cx="60" cy="180" r="3"/>
+              <circle cx="120" cy="180" r="3"/>
+              <circle cx="180" cy="180" r="3"/>
+              <circle cx="240" cy="180" r="3"/>
+              <circle cx="300" cy="180" r="3"/>
+              <circle cx="30" cy="210" r="3"/>
+              <circle cx="90" cy="210" r="3"/>
+              <circle cx="150" cy="210" r="3"/>
+              <circle cx="210" cy="210" r="3"/>
+              <circle cx="270" cy="210" r="3"/>
+              <circle cx="330" cy="210" r="3"/>
+              <circle cx="60" cy="240" r="3"/>
+              <circle cx="120" cy="240" r="3"/>
+              <circle cx="180" cy="240" r="3"/>
+              <circle cx="240" cy="240" r="3"/>
+              <circle cx="300" cy="240" r="3"/>
+              <circle cx="30" cy="270" r="3"/>
+              <circle cx="90" cy="270" r="3"/>
+              <circle cx="150" cy="270" r="3"/>
+              <circle cx="210" cy="270" r="3"/>
+              <circle cx="270" cy="270" r="3"/>
+              <circle cx="330" cy="270" r="3"/>
+              <circle cx="60" cy="300" r="3"/>
+              <circle cx="120" cy="300" r="3"/>
+              <circle cx="180" cy="300" r="3"/>
+              <circle cx="240" cy="300" r="3"/>
+              <circle cx="300" cy="300" r="3"/>
+            </g>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </nav>

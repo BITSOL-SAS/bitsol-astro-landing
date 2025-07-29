@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import InfoCard from '../../components/InfoCard.astro';
+
+---
+
+<Layout title="BITSOL - Projects">
+  <div style="width: 100vw">
+      <h1 class="page-title">Projects</h1>
+
+      <InfoCard 
+      title="ArchiHUB"
+      description="ArchiHUB is a Colombian open-source project that seeks to organize and facilitate access to historical memory."
+      url="#"
+      images={["/imgs/archihub/3.jpg", "/imgs/archihub/4.jpg", "/imgs/archihub/6.jpg", "/imgs/archihub/7.jpg"]}
+    />
+
+    <InfoCard 
+      title="ArchiHUB natural monitor"
+      description="ArchiHUB's flexibility allows it to be used as a powerful information system to build a natural memory archive"
+      url="/whatsapp"
+      images={["/imgs/archihubnature/1.jpg", "/imgs/archihubnature/3.jpg"]}
+      imagePosition="right"
+    />    
+  </div>
+</Layout> 
