@@ -1,7 +1,7 @@
 ---
-import Carousel from '../components/carrusel.astro';
-import InfoCard from '../components/InfoCard.astro';
-import Layout from '../layouts/Layout.astro';
+import Carousel from '../../components/carrusel.astro';
+import InfoCard from '../../components/InfoCard.astro';
+import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout title="BITSOL - Tecnología que conecta, preserva e inspira">
@@ -65,7 +65,7 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
   <script>
-    import { initLogo } from '../scripts/logo.js';
+    import { initLogo } from '../../scripts/logo.js';
     const logoContainer = document.getElementById('logo-container');
     if (logoContainer) {
       initLogo(logoContainer, true);
