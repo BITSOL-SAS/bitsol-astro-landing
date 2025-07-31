@@ -1,7 +1,41 @@
 ---
-import Carousel from '../../components/carrusel.astro';
-import InfoCard from '../../components/InfoCard.astro';
-import Layout from '../../layouts/Layout.astro';
+import CarruselBlogPost from "../../components/CarruselBlogPost.astro";
+import InfoCard from "../../components/InfoCard.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const archihubSlides = [
+  {
+    image: "/imgs/imagen_01.png",
+    caption: "Vista de imágenes con metadatos Exif y de catalogación",
+  },
+  {
+    image: "/imgs/imagen_08.png",
+    caption:
+      "Transcripción automática para los videos con estadísticas de oradores y edición avanzada de subtítulos",
+  },
+  {
+    image: "/imgs/imagen_02.png",
+    caption:
+      "Vista general de las galerías y de los datos de catalogación con filtros y búsqueda",
+  },
+
+  {
+    image: "/imgs/imagen_03.png",
+    caption: "Búsqueda avanzada en los documentos y chat IA para asistencia",
+  },
+  {
+    image: "/imgs/imagen_04.png",
+    caption: "Optimizado para archivos históricos y documentos institucionales",
+  },
+  {
+    image: "/imgs/imagen_05.png",
+    caption: "Vista de imágenes con metadatos Exif y de catalogación",
+  },
+  {
+    image: "/imgs/imagen_06.png",
+    caption: "Asistente de IA para las imágenes y documentos",
+  },
+];
 ---
 
 <Layout title="BITSOL - Tecnología que conecta, preserva e inspira">
@@ -10,63 +44,82 @@ import Layout from '../../layouts/Layout.astro';
     <div class="spotlight-content">
       <!-- <span class="spotlight-version-badge">Versión 0.9.10 <span class="badge-dot"></span></span> -->
       <h1 class="spotlight-title">BITSOL</h1>
-      <div class="spotlight-subtitle">Tecnología que conecta, preserva e inspira</div>
+      <div class="spotlight-subtitle">
+        Tecnología que conecta, preserva e inspira
+      </div>
       <div class="spotlight-desc">
-        En BITSOL, aprovechamos el poder de la tecnología para impulsar la innovación y generar impacto social.
-        Desarrollamos soluciones digitales de código abierto que transforman comunidades e instituciones.
+        En BITSOL, aprovechamos el poder de la tecnología para impulsar la
+        innovación y generar impacto social. Desarrollamos soluciones digitales
+        de código abierto que transforman comunidades e instituciones.
       </div>
       <div class="spotlight-buttons">
-        <a href="https://archihub.bit-sol.com.co/" class="btn">Ver demo</a>
-        <a href="mailto:contact@bit-sol.com.co" class="btn btn-secondary">Contactar</a>
+        <a href="https://archihub.bit-sol.com.co/" class="btn"
+          >Ver demo ArchiHUB</a
+        >
+        <a href="mailto:contact@bit-sol.com.co" class="btn btn-secondary"
+          >Contactar</a
+        >
       </div>
-      <Carousel />
-
     </div>
+    <CarruselBlogPost slides={archihubSlides} />
     <div class="spotlight-content" id="archihub">
       <div class="spotlight-subtitle">¿Qué es ArchiHUB?</div>
       <div class="spotlight-desc">
-        ArchiHUB es una aplicación de código abierto colombiana que busca tejer narrativas a través de la
-        sistematización de información, ya sea con documentos institucionales, archivos históricos o datos naturales.
-        Puedes ir al <a href="https://github.com/Archihub-App">repositorio</a> y a la <a
-          href="https://archihub-app.github.io/archihub.github.io/">documentación oficial</a> para conocer más!
+        ArchiHUB es una aplicación de código abierto colombiana que busca tejer
+        narrativas a través de la sistematización de información, ya sea con
+        documentos institucionales, archivos históricos o datos naturales.
+        Puedes ir al <a href="https://github.com/Archihub-App">repositorio</a> y
+        a la <a href="https://archihub-app.github.io/archihub.github.io/"
+          >documentación oficial</a
+        > para conocer más!
       </div>
       <div class="spotlight-buttons">
-        <a href="https://archihub.bit-sol.com.co/" class="btn btn-secondary">Conoce más</a>
+        <a href="/es/projects/archihub" class="btn btn-secondary">Conoce más</a>
       </div>
     </div>
     <div class="spotlight-content" id="nature">
       <div class="spotlight-subtitle">ArchiHUB y la naturaleza</div>
       <div class="spotlight-desc">
-        ArchiHUB te ofrece la posibilidad de conectar una amplia gama de sensores para recolectar información, además
-        de interfaces que te permiten realizar acciones en el mundo real, todo directamente desde la aplicación. ¡Una
-        manera simple y práctica de unir el mundo digital con el físico!
+        ArchiHUB te ofrece la posibilidad de conectar una amplia gama de
+        sensores para recolectar información, además de interfaces que te
+        permiten realizar acciones en el mundo real, todo directamente desde la
+        aplicación. ¡Una manera simple y práctica de unir el mundo digital con
+        el físico!
       </div>
       <div class="spotlight-buttons">
-        <a href="https://archihub.bit-sol.com.co/" class="btn btn-secondary">Conoce más</a>
+        <a href="/es/projects/archihubnature" class="btn btn-secondary"
+          >Conoce más</a
+        >
       </div>
     </div>
     <div class="spotlight-content" id="about">
       <div class="spotlight-subtitle">Acerca de BITSOL</div>
       <div class="spotlight-desc">
-        <p>Nos enfocamos en áreas clave como la memoria histórica, el proceso de paz, sensores ambientales y la
-          gestión documental. Nuestra experiencia también abarca soluciones para medios en la web y tecnologías de
-          Internet de las Cosas (IoT), ayudando a las organizaciones a mantenerse conectadas, contar sus historias y
-          gestionar sus recursos de manera eficiente.
+        <p>
+          Nos enfocamos en áreas clave como la memoria histórica, el proceso de
+          paz, sensores ambientales y la gestión documental. Nuestra experiencia
+          también abarca soluciones para medios en la web y tecnologías de
+          Internet de las Cosas (IoT), ayudando a las organizaciones a
+          mantenerse conectadas, contar sus historias y gestionar sus recursos
+          de manera eficiente.
         </p>
         <p>
-          Desde plataformas digitales hasta sensores inteligentes, cada solución que creamos está diseñada con una
-          combinación de visión artística y excelencia técnica, contribuyendo a la preservación de la memoria, la
+          Desde plataformas digitales hasta sensores inteligentes, cada solución
+          que creamos está diseñada con una combinación de visión artística y
+          excelencia técnica, contribuyendo a la preservación de la memoria, la
           verdad y el progreso sostenible.
         </p>
       </div>
       <div class="spotlight-buttons">
-        <a href="mailto:contact@bit-sol.com.co" class="btn btn-secondary">Contacto</a>
+        <a href="mailto:contact@bit-sol.com.co" class="btn btn-secondary"
+          >Contacto</a
+        >
       </div>
     </div>
   </div>
   <script>
-    import { initLogo } from '../../scripts/logo.js';
-    const logoContainer = document.getElementById('logo-container');
+    import { initLogo } from "../../scripts/logo.js";
+    const logoContainer = document.getElementById("logo-container");
     if (logoContainer) {
       initLogo(logoContainer, true);
     }

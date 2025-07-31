@@ -99,17 +99,23 @@ p {
 
 .spotlight-content {
     position: relative;
-    z-index: 10;
     margin: 0 auto;
     width: 100%;
     max-width: 900px;
-    padding: 0 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     margin-top: 80px;
+}
+
+@media (max-width: 768px) {
+    .spotlight-content {
+        width: 90vw;
+        margin: 0;
+        margin-left: 5vw;;
+    }
 }
 
 .spotlight-title {
@@ -131,9 +137,9 @@ p {
     opacity: 0;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     .spotlight-title {
-        font-size: 6rem;
+        height: 60vh;
     }
 }
 
@@ -372,10 +378,10 @@ p {
 
 
 .cursor-navbar {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100vw;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    width: 90vw;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -384,11 +390,12 @@ p {
     min-height: 68px;
     background: transparent;
     pointer-events: auto;
+    transform: translateX(-50%);
 }
 
 .cursor-navbar-inner {
     background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(15px);
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.08);
     border-radius: 5px;
     /* border: 1px solid rgba(255, 255, 255, 0.22); */
@@ -454,6 +461,11 @@ p {
     opacity: 0.93;
     letter-spacing: 0.01em;
 }
+.cursor-navbar-link svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
 .cursor-navbar-links-group .cursor-navbar-link {
     padding: 0.5em 0.5em;
 }
@@ -474,9 +486,9 @@ p {
 
 .cursor-navbar-user {
     background: none;
-    border: 1.5px solid #232323;
+    border: 1.5px solid #fff;
     border-radius: 8px;
-    color: #fff;
+    border-color: rgba(255, 255, 255, 0.18);
     min-width: 36px;
     font-family: 'Chakra Petch', Arial, sans-serif;
     text-decoration: none;
@@ -488,6 +500,7 @@ p {
     cursor: pointer;
     transition: border 0.18s, background 0.18s;
     margin-right: 0.2rem;
+    color: #fff;
     opacity: 0.85;
 }
 
@@ -496,8 +509,7 @@ p {
 }
 
 .cursor-navbar-user:hover {
-    background: #181818;
-    border-color: #444;
+    background: rgba(255, 255, 255, 0.05);
     opacity: 1;
 }
 

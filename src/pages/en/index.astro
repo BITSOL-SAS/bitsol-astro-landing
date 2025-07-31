@@ -1,7 +1,41 @@
 ---
-import Carousel from '../../components/carrusel.astro';
 import InfoCard from '../../components/InfoCard.astro';
 import Layout from '../../layouts/Layout.astro';
+import CarruselBlogPost from "../../components/CarruselBlogPost.astro";
+
+const archihubSlides = [
+  {
+    image: "/imgs/imagen_01.png",
+    caption: "Image view with Exif and cataloging metadata",
+  },
+  {
+    image: "/imgs/imagen_08.png",
+    caption:
+      "Automatic video transcription with speaker statistics and advanced subtitle editing",
+  },
+  {
+    image: "/imgs/imagen_02.png",
+    caption:
+      "Overview of galleries and cataloging data with filters and search",
+  },
+
+  {
+    image: "/imgs/imagen_03.png",
+    caption: "Advanced document search and AI chat for assistance",
+  },
+  {
+    image: "/imgs/imagen_04.png",
+    caption: "Optimized for historical files and institutional documents",
+  },
+  {
+    image: "/imgs/imagen_05.png",
+    caption: "Image view with Exif and cataloging metadata",
+  },
+  {
+    image: "/imgs/imagen_06.png",
+    caption: "AI assistant for images and documents",
+  },
+];
 ---
 
 <Layout title="BITSOL - Technology that connects, preserves and inspires">
@@ -16,12 +50,11 @@ import Layout from '../../layouts/Layout.astro';
         We develop open-source digital solutions that transform communities and institutions.
       </div>
       <div class="spotlight-buttons">
-        <a href="https://archihub.bit-sol.com.co/" class="btn">View demo</a>
+        <a href="https://archihub.bit-sol.com.co/" class="btn">View ArchiHUB demo</a>
         <a href="mailto:contact@bit-sol.com.co" class="btn btn-secondary">Contact</a>
       </div>
-      <Carousel />
-
     </div>
+    <CarruselBlogPost slides={archihubSlides} />
     <div class="spotlight-content" id="archihub">
       <div class="spotlight-subtitle">What is ArchiHUB?</div>
       <div class="spotlight-desc">
@@ -31,7 +64,7 @@ import Layout from '../../layouts/Layout.astro';
           href="https://archihub-app.github.io/archihub.github.io/">official documentation</a> to learn more!
       </div>
       <div class="spotlight-buttons">
-        <a href="https://archihub.bit-sol.com.co/" class="btn btn-secondary">Learn more</a>
+        <a href="/en/projects/archihub" class="btn btn-secondary">Learn more</a>
       </div>
     </div>
     <div class="spotlight-content" id="nature">
@@ -42,7 +75,7 @@ import Layout from '../../layouts/Layout.astro';
         simple and practical way to unite the digital world with the physical!
       </div>
       <div class="spotlight-buttons">
-        <a href="https://archihub.bit-sol.com.co/" class="btn btn-secondary">Learn more</a>
+        <a href="/en/projects/archihubnature" class="btn btn-secondary">Learn more</a>
       </div>
     </div>
     <div class="spotlight-content" id="about">

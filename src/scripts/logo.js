@@ -178,6 +178,8 @@ export function initLogo(container, showModel = false) {
                 renderer.render(scene, camera);
             }
 
+            handleScroll(); // Call handleScroll to set initial state based on scroll position
+
             // animate_logo(); // This is not needed as the main animate() calls render
         }, undefined, function (error) {
             console.error(error);
@@ -258,11 +260,11 @@ export function initLogo(container, showModel = false) {
         }
 
         if (wireframe && loadedModel) {
-            loadedModel.scene.traverse(function (child) {
-                if (child.isMesh) {
-                    child.material.wireframe = true;
-                }
-            });
+            // loadedModel.scene.traverse(function (child) {
+            //     if (child.isMesh) {
+            //         child.material.wireframe = true;
+            //     }
+            // });
         } else if (loadedModel) {
             loadedModel.scene.traverse(function (child) {
                 if (child.isMesh) {
@@ -275,28 +277,32 @@ export function initLogo(container, showModel = false) {
         renderer.render(scene, camera);
     }
 
-    if (showModel) {
-        document.addEventListener('scroll', (event) => {
-            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            if (loadedModel) {
-                // When the user has scrolled at least 100vh from the top
-                if (scrollTop > window.innerHeight / 4) {
+    const handleScroll = () => {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (loadedModel) {
+            // When the user has scrolled at least 100vh from the top
+            if (scrollTop > window.innerHeight / 6) {
+                if (!wireframe) { // Check state before animating
+                    gsap.killTweensOf(loadedModel.scene.position);
+                    gsap.killTweensOf(loadedModel.scene.scale);
                     gsap.to(loadedModel.scene.position, {
                         x: 0,
-                        y: 400,
-                        duration: 1
+                        y: 0,
+                        duration: 2
                     });
                     gsap.to(loadedModel.scene.scale, {
-                        x: 2,
-                        y: 2,
-                        z: 2,
-                        duration: 1
+                        x: 0.01,
+                        y: 0.01,
+                        z: 0.01,
+                        duration: 2
                     });
-                    // gsap.to(loadedModel.scene.rotation, {
-                    //     y: loadedModel.scene.rotation.y + Math.PI * 2,
-                    //     duration: 1
-                    // });
-                } else {
+                    wireframe = true;
+                    moveLogo = true;
+                }
+            } else {
+                if (wireframe) { // Check state before animating
+                    gsap.killTweensOf(loadedModel.scene.position);
+                    gsap.killTweensOf(loadedModel.scene.scale);
                     gsap.to(loadedModel.scene.position, {
                         x: 0,
                         y: 0,
@@ -308,13 +314,18 @@ export function initLogo(container, showModel = false) {
                         z: 7,
                         duration: 1
                     });
-                    // gsap.to(loadedModel.scene.rotation, {
-                    //     y: -1.5,
-                    //     duration: 1
-                    // });
+                    wireframe = false;
+                    moveLogo = false;
                 }
             }
-        }, true);
+        }
+    };
+
+    if (showModel) {
+
+
+
+        document.addEventListener('scroll', handleScroll, true);
     }
 
     window.addEventListener('resize', () => {
@@ -325,4 +336,6 @@ export function initLogo(container, showModel = false) {
     });
 
     animate();
+    handleScroll();
+
 }

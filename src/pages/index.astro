@@ -1,4 +1,114 @@
 ---
-// Redirigir a la página en español por defecto
-return Astro.redirect('/es/');
---- 
+import InfoCard from '../components/InfoCard.astro';
+import Layout from '../layouts/Layout.astro';
+import CarruselBlogPost from "../components/CarruselBlogPost.astro";
+
+const archihubSlides = [
+  {
+    image: "/imgs/imagen_01.png",
+    caption: "Image view with Exif and cataloging metadata",
+  },
+  {
+    image: "/imgs/imagen_08.png",
+    caption:
+      "Automatic video transcription with speaker statistics and advanced subtitle editing",
+  },
+  {
+    image: "/imgs/imagen_02.png",
+    caption:
+      "Overview of galleries and cataloging data with filters and search",
+  },
+
+  {
+    image: "/imgs/imagen_03.png",
+    caption: "Advanced document search and AI chat for assistance",
+  },
+  {
+    image: "/imgs/imagen_04.png",
+    caption: "Optimized for historical files and institutional documents",
+  },
+  {
+    image: "/imgs/imagen_05.png",
+    caption: "Image view with Exif and cataloging metadata",
+  },
+  {
+    image: "/imgs/imagen_06.png",
+    caption: "AI assistant for images and documents",
+  },
+];
+---
+
+<Layout title="BITSOL - Technology that connects, preserves and inspires">
+  <div id="logo-container"></div>
+  <div style="width: 100vw">
+    <div class="spotlight-content">
+      <!-- <span class="spotlight-version-badge">Version 0.9.10 <span class="badge-dot"></span></span> -->
+      <h1 class="spotlight-title">BITSOL</h1>
+      <div class="spotlight-subtitle">Technology that connects, preserves and inspires</div>
+      <div class="spotlight-desc">
+        At BITSOL, we harness the power of technology to drive innovation and generate social impact.
+        We develop open-source digital solutions that transform communities and institutions.
+      </div>
+      <div class="spotlight-buttons">
+        <a href="https://archihub.bit-sol.com.co/" class="btn">View ArchiHUB demo</a>
+        <a href="mailto:contact@bit-sol.com.co" class="btn btn-secondary">Contact</a>
+      </div>
+    </div>
+    <CarruselBlogPost slides={archihubSlides} />
+    <div class="spotlight-content" id="archihub">
+      <div class="spotlight-subtitle">What is ArchiHUB?</div>
+      <div class="spotlight-desc">
+        ArchiHUB is a Colombian open-source application that seeks to weave narratives through the
+        systematization of information, whether with institutional documents, historical archives or natural data.
+        You can go to the <a href="https://github.com/Archihub-App">repository</a> and the <a
+          href="https://archihub-app.github.io/archihub.github.io/">official documentation</a> to learn more!
+      </div>
+      <div class="spotlight-buttons">
+        <a href="/en/projects/archihub" class="btn btn-secondary">Learn more</a>
+      </div>
+    </div>
+    <div class="spotlight-content" id="nature">
+      <div class="spotlight-subtitle">ArchiHUB and nature</div>
+      <div class="spotlight-desc">
+        ArchiHUB offers you the possibility to connect a wide range of sensors to collect information, in addition
+        to interfaces that allow you to perform actions in the real world, all directly from the application. A
+        simple and practical way to unite the digital world with the physical!
+      </div>
+      <div class="spotlight-buttons">
+        <a href="/en/projects/archihubnature" class="btn btn-secondary">Learn more</a>
+      </div>
+    </div>
+    <div class="spotlight-content" id="about">
+      <div class="spotlight-subtitle">About BITSOL</div>
+      <div class="spotlight-desc">
+        <p>We focus on key areas such as historical memory, peace process, environmental sensors and
+          document management. Our expertise also encompasses web media solutions and Internet of Things (IoT)
+          technologies, helping organizations stay connected, tell their stories and manage their resources efficiently.
+        </p>
+        <p>
+          From digital platforms to smart sensors, every solution we create is designed with a combination of
+          artistic vision and technical excellence, contributing to the preservation of memory, truth and sustainable progress.
+        </p>
+      </div>
+      <div class="spotlight-buttons">
+        <a href="mailto:contact@bit-sol.com.co" class="btn btn-secondary">Contact</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    import { initLogo } from '../scripts/logo.js';
+    const logoContainer = document.getElementById('logo-container');
+    if (logoContainer) {
+      initLogo(logoContainer, true);
+    }
+  </script>
+  <style>
+    #logo-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</Layout> 
